@@ -1,5 +1,5 @@
 <?php
-
+namespace Sadeem\Core\Module\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

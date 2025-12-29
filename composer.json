@@ -1,0 +1,26 @@
+{
+    "name": "sadeem/core",
+    "description": "Core module for Sadeem project providing essential services, base infrastructure, shared DTOs, Repositories, Providers, and reusable utilities to all other modules.",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Muath R Abu Ouda",
+            "email": "muathabuouda@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sadeem\\Core\\": "",
+            "Sadeem\\Core\\Module\\": "module"
+        },
+        "files": []
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sadeem\\Core\\Tests\\": "tests/"
+        }
+    },
+    "require": {},
+    "require-dev": {}
+}
