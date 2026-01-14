@@ -30,9 +30,14 @@ class RedirectBackResponder extends Responder
                 'Expected instance of RedirectBackResponderOptions'
             );
         }
+        // Extract the Response from options
         $response = $options->response;
+
+        // Add flash messages to redirect back response
         $flash = $options->flash;
         $flash['message'] = $response->message();
+
+        // Return the redirect back response
         return redirect()->back()->with($flash);
     }
 }

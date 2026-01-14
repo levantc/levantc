@@ -15,6 +15,13 @@ use Sadeem\Core\Module\Responses\Response;
 class InertiaResponderOptions extends ResponderOptions
 {
     /**
+     * Additional flash data to include in the redirect session.
+     *
+     * @var array<string, mixed>
+     */
+    public array $flash = [];
+
+    /**
      * The Inertia component to render.
      *
      * Defaults to 'Dashboard/Index' if not specified.
@@ -33,9 +40,11 @@ class InertiaResponderOptions extends ResponderOptions
     public function __construct(
         Response $response,
         string $component = 'Dashboard/Index',
-        array $extra = []
+        array $extra = [],
+        array $flash = []
     ) {
         parent::__construct($response, $extra);
         $this->component = $component;
+        $this->flash = $flash;
     }
 }

@@ -30,9 +30,16 @@ enum ResponderType: string
     case INERTIA = 'inertia';
 
     /**
-     * Redirect Responder
-     *
-     * Used for standard web requests (POST/PUT/DELETE) that redirect back.
+     * Redirect Back Responder
+     * * Used for standard web requests (POST/PUT/DELETE) that should
+     * redirect the user back to the previous page (e.g., after a failed validation or a simple update).
      */
-    case REDIRECT = 'redirect';
+    case REDIRECT_BACK = 'redirect_back';
+
+    /**
+     * Redirect To Route Responder
+     * * Used for web requests that require redirecting to a specific
+     * named route (e.g., redirecting to the index page after successfully deleting a resource).
+     */
+    case REDIRECT_TO_ROUTE = 'redirect_to_route';
 }

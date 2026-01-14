@@ -25,7 +25,7 @@ class UseCaseFactory
      * Constructor
      *
      * @param Container $container
-     *   The Laravel service container used to resolve dependencies.
+     *   The Laravel service container is used to resolve dependencies.
      */
     public function __construct(Container $container)
     {
@@ -33,22 +33,22 @@ class UseCaseFactory
     }
 
     /**
-     * Create an instance of an Usecase
+     * Create an instance of an UseCase
      *
-     * @param string $usecaseClass
-     *   Fully qualified class name of the Usecase to instantiate.
+     * @param string $useCaseClass
+     *   Fully qualified class name of the UseCase to instantiate.
      * @return mixed
      *
      * This method leverages Laravel's container to automatically
-     * inject all required dependencies of the Usecase.
+     * inject all required dependencies of the UseCase.
      * @throws BindingResolutionException
      */
-    public function make(string $usecaseClass): mixed
+    public function make(string $useCaseClass): mixed
     {
-        if (!class_exists($usecaseClass)) {
-            throw new InvalidArgumentException("Usecase class $usecaseClass not found.");
+        if (!class_exists($useCaseClass)) {
+            throw new InvalidArgumentException("UseCase class $useCaseClass not found.");
         }
-        // Use Laravel's service container to resolve the Usecase class
-        return $this->container->make($usecaseClass);
+        // Use Laravel's service container to resolve the UseCase class
+        return $this->container->make($useCaseClass);
     }
 }
