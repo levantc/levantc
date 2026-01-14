@@ -6,6 +6,7 @@ use Sadeem\Core\Module\Enums\Responders\ResponderType;
 use Sadeem\Core\Module\Http\Responders\InertiaResponder;
 use Sadeem\Core\Module\Http\Responders\JsonResponder;
 use Sadeem\Core\Module\Http\Responders\RedirectBackResponder;
+use Sadeem\Core\Module\Http\Responders\RedirectToRouteResponder;
 use Sadeem\Core\Module\Http\Responders\Responder;
 
 /**
@@ -32,7 +33,8 @@ class ResponderFactory
         return match ($type) {
             ResponderType::JSON => new JsonResponder(),
             ResponderType::INERTIA => new InertiaResponder(),
-            ResponderType::REDIRECT => new RedirectBackResponder(),
+            ResponderType::REDIRECT_BACK => new RedirectBackResponder(),
+            ResponderType::REDIRECT_TO_ROUTE => new RedirectToRouteResponder(),
         };
     }
 }
