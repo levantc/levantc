@@ -2,7 +2,8 @@
 
 namespace Sadeem\Core\Module\Responses;
 
-use Sadeem\Core\Module\DTOs\DTO;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Sadeem\Core\Module\Contracts\UseCases\ResultContract;
 
 /**
@@ -23,12 +24,11 @@ readonly class Response
      * Constructor
      *
      * @param ResultContract $result
-     *   The result Contract of the UseCase (e.g., SaveUserResult, UpdateUserResult, etc.)
-     * @param DTO|null $data
+     * @param JsonResource|ResourceCollection|null $data
      */
     public function __construct(
-        public ResultContract $result,
-        public ?DTO   $data = null,
+        public ResultContract  $result,
+        public JsonResource|ResourceCollection|null $data = null,
     ) {}
 
     /**
