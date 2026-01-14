@@ -29,12 +29,15 @@ class InertiaResponder extends Responder
 
     public function respond(ResponderOptions $options): InertiaResponse
     {
-        // Ensure correct type for type safety
+        // Ensure the correct type for type safety
         if (! $options instanceof InertiaResponderOptions) {
             throw new \InvalidArgumentException(
                 'Expected instance of InertiaResponderOptions'
             );
         }
+
+        // Validate component existence before rendering
+        $this->ensureComponentExists($options->component);
 
         // Extract the Response from options
         $response = $options->response;
@@ -46,6 +49,9 @@ class InertiaResponder extends Responder
         $data = $this->mergeMeta($responseData, $options->extra);
 
         // Return the Inertia response with the specified component
-        return Inertia::render($options->component, $data);
+        return Inertia::render(
+            component: $options->component ,
+            props: $data
+        );
     }
 }
