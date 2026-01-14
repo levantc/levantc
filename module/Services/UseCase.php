@@ -57,8 +57,8 @@ abstract class UseCase implements UsecaseContract
     /**
      * Execute the business logic of the use case.
      *
-     * @param DTO $data Input DTO
+     * @param ?DTO $data Input DTO
      * @return Response Response object implementing Response
      */
-    abstract public function handle(DTO $data): Response;
+    abstract public function handle(?DTO $data): Response;
 }

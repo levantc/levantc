@@ -5,7 +5,7 @@ use Sadeem\Core\Module\DTOs\DTO;
 use Sadeem\Core\Module\Responses\Response;
 
 /**
- * UsecaseContract
+ * UseCaseContract
  *
  * Base interface for all use cases.
  *
@@ -17,8 +17,8 @@ interface UseCaseContract
     /**
      * Execute the use case logic.
      *
-     * @param  DTO $data
+     * @param  ?DTO $data
      * @return Response Response object implementing Response
      */
-    public function handle(DTO $data): Response;
+    public function handle(?DTO $data): Response;
 }
