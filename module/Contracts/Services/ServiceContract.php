@@ -1,5 +1,5 @@
 <?php
-namespace Sadeem\Core\Module\Contracts\UseCases;
+namespace Sadeem\Core\Module\Contracts\Services;
 
 use Sadeem\Core\Module\DTOs\DTO;
 use Sadeem\Core\Module\Responses\Response;
@@ -12,7 +12,7 @@ use Sadeem\Core\Module\Responses\Response;
  * @template TInput of DTO
  * @template TOutput of Response
  */
-interface UseCaseContract
+interface ServiceContract
 {
     /**
      * Execute the use case logic.

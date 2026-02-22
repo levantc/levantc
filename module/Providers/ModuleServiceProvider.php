@@ -28,6 +28,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Load and register this module's routes'
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/module.php');
     }
 }

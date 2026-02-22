@@ -29,12 +29,15 @@ class InertiaResponder extends Responder
 
     public function respond(ResponderOptions $options): InertiaResponse
     {
-        // Ensure correct type for type safety
+        // Ensure the correct type for type safety
         if (! $options instanceof InertiaResponderOptions) {
             throw new \InvalidArgumentException(
                 'Expected instance of InertiaResponderOptions'
             );
         }
+
+        // Validate component existence before rendering
+        $this->ensureComponentExists($options->component);
 
         // Extract the Response from options
         $response = $options->response;
@@ -42,10 +45,24 @@ class InertiaResponder extends Responder
         // Format the response data
         $responseData = $this->formatResponse($response);
 
+        // Share the toast directly with Inertia for the current request
+        // We only share if there's no existing toast flashed in the session to avoid overwriting it
+        if ($toast = $response->toast()) {
+            $existingFlash = Inertia::getShared('flash') ?? [];
+            if (! isset($existingFlash['toast']) || ! $response->isSuccess()) {
+                Inertia::share('flash', array_merge($existingFlash, [
+                    'toast' => $toast->toArray()
+                ]));
+            }
+        }
+
         // Merge extra metadata if provided
         $data = $this->mergeMeta($responseData, $options->extra);
 
         // Return the Inertia response with the specified component
-        return Inertia::render($options->component, $data);
+        return Inertia::render(
+            component: $options->component ,
+            props: $data
+        );
     }
 }
