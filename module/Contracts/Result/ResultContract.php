@@ -1,6 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Contracts\UseCases;
+namespace Sadeem\Core\Module\Contracts\Result;
+
+use Sadeem\Core\Module\Enums\Actions\Feedback\Variant;
 
 /**
  * Interface resultInterface
@@ -14,11 +16,27 @@ namespace Sadeem\Core\Module\Contracts\UseCases;
 interface ResultContract
 {
     /**
+     * Get the feedback title for the operation.
+     *
+     * @param array $context
+     * @return string
+     */
+    public function title(array $context = []): string;
+
+    /**
      * Get the feedback message for the operation.
      *
-     * @return array{title: string, message: string}
+     * @param array $context
+     * @return string
      */
-    public function message(): array;
+    public function message(array $context = []): string;
+
+    /**
+     * Get the feedback message for the operation.
+     *
+     * @return Variant
+     */
+    public function variant(): Variant;
 
     /**
      * Get the HTTP status code associated with the result.

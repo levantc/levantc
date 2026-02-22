@@ -45,6 +45,17 @@ class InertiaResponder extends Responder
         // Format the response data
         $responseData = $this->formatResponse($response);
 
+        // Share the toast directly with Inertia for the current request
+        // We only share if there's no existing toast flashed in the session to avoid overwriting it
+        if ($toast = $response->toast()) {
+            $existingFlash = Inertia::getShared('flash') ?? [];
+            if (! isset($existingFlash['toast']) || ! $response->isSuccess()) {
+                Inertia::share('flash', array_merge($existingFlash, [
+                    'toast' => $toast->toArray()
+                ]));
+            }
+        }
+
         // Merge extra metadata if provided
         $data = $this->mergeMeta($responseData, $options->extra);
 

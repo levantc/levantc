@@ -3,13 +3,13 @@
 namespace Sadeem\Core\Module\Repositories;
 
 use Exception;
+use Illuminate\Database\Eloquent\Model;
 use LogicException;
+use ReflectionException;
 use Sadeem\Core\Module\Contracts\Repositories\ModelRepositoryInterface;
 use Sadeem\Core\Module\DTOs\DTO;
-use Illuminate\Database\Eloquent\Model;
-use ReflectionException;
-use Sadeem\I18n\Module\Enums\UseCases\Language\DestroyLanguageResult;
-use Sadeem\I18n\Module\Responses\Language\DestroyLanguageResponse;
+use Sadeem\I18n\Module\Enums\Language\UseCases\DestroyLanguageResult;
+use Sadeem\I18n\Module\Responses\Language\UseCases\DestroyLanguageResponse;
 
 /**
  * Class Repository
@@ -54,12 +54,9 @@ abstract class ModelRepository implements ModelRepositoryInterface
      */
     public function all(): array
     {
-        $models = $this->model->all();
-        $dtos = [];
-        foreach ($models as $model) {
-            $dtos[] = $this->mapToDTO($model);
-        }
-        return $dtos;
+        return $this->model->get()
+            ->map(fn($model) => $this->mapToDTO($model))
+            ->all();
     }
 
     /**
@@ -71,12 +68,16 @@ abstract class ModelRepository implements ModelRepositoryInterface
      */
     public function save(DTO $dto): DTO
     {
-        // Filter out any null values from the DTO to avoid overwriting existing model data
-        // $data = array_filter($dto->toArray(), fn($value) => !is_null($value));
+        // Some tables might need null values, so we check if filtering is disabled
         $data = $dto->toArray();
 
+        // Filter out any null values from the DTO to avoid overwriting existing model data
+        if ($dto->shouldFilterNulls()) {
+            $data = array_filter($data, fn($value) => !is_null($value));
+        }
+
         // Use the model attached to the DTO if it exists (Update), otherwise create a new model instance (Create)
-        $model = $dto->getModel() ?? $this->model->newInstance($data);
+        $model = $dto->getModel() ?? $this->model->newInstance();
 
         // Fill the model with data from the DTO
         $model->fill($data);
@@ -89,22 +90,67 @@ abstract class ModelRepository implements ModelRepositoryInterface
     }
 
     /**
+     * Find a model by its primary key.
+     *
+     * @param int|string $id The primary key of the model to retrieve.
+     * @return DTO|null Returns the corresponding DTO if found, or null if not.
+     */
+    public function find(int|string $id): ?DTO
+    {
+        $model = $this->model->find($id);
+
+        if (! $model) {
+            return null;
+        }
+
+        return $this->mapToDTO($model);
+    }
+
+    /**
+     * Take a snapshot of an entity by ID and map it to a Snapshot DTO.
+     *
+     * - Generic method works for ANY model.
+     * - The UseCase or Repository provides the DTO class.
+     *
+     * @param int $id
+     * @param class-string<DTO> $snapshotDtoClass
+     * @return DTO|null
+     * @throws ReflectionException
+     */
+    public function snapshotById(int $id, string $snapshotDtoClass): ?DTO
+    {
+        // 1) Fetch model (Eloquent) from database
+        $model = $this->model->find($id);
+
+        // 2) If not found => no snapshot
+        if (!$model) {
+            return null;
+        }
+
+        // 3) Ensure the class is a DTO
+        if (!is_subclass_of($snapshotDtoClass, DTO::class)) {
+            throw new \InvalidArgumentException(
+                "Snapshot DTO must extend " . DTO::class
+            );
+        }
+
+        // 4) Build snapshot DTO from model (your DTO::fromModel handles mapping)
+        return $snapshotDtoClass::fromModel($model);
+    }
+
+    /**
      * Delete a model using data provided by a DTO.
      *
      * @param DTO $dto Data Transfer Object specific to the operation.
-     * @return DestroyLanguageResponse
+     * @return bool
      */
-    public function destroy(DTO $dto): DestroyLanguageResponse
+    public function destroy(DTO $dto): bool
     {
-        // Default result assumes a successful deletion
-        $result = DestroyLanguageResult::SUCCESS;
-
         // Retrieve the model attached to the DTO (must exist for deletion)
         $model = $dto->getModel();
         if (! $model) {
             throw new LogicException('Cannot delete a model without an attached instance.');
         }
-
         // Determine whether to force delete or perform a soft delete
         try {
             if (method_exists($model, 'forceDelete') && ($dto->force ?? false)) {
@@ -112,12 +158,9 @@ abstract class ModelRepository implements ModelRepositoryInterface
             } else {
                 $model->delete();
             }
+            return true;
         } catch (Exception) {
-            // If any exception occurs during deletion, mark the operation as failed
-            $result = DestroyLanguageResult::FAILED;
+            return false;
         }
-
-        // Return a typed response representing the outcome of the delete operation
-        return new DestroyLanguageResponse($result, null);
     }
 }
