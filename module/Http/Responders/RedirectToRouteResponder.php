@@ -34,13 +34,11 @@ class RedirectToRouteResponder extends Responder
         // Extract the Response and route details from options
         $response = $options->response;
 
-        // Add feedback message to flash data
-        $flash = $options->flash;
-        $flash['message'] = $response->message();
+        // Flash the toast to the session for the next request
+        $response->toast()->flash();
 
         // Return the redirect to route response
         return redirect()
-            ->route($options->routeName, $options->parameters)
-            ->with($flash);
+            ->route($options->routeName, $options->parameters);
     }
 }

@@ -30,14 +30,21 @@ class RedirectBackResponder extends Responder
                 'Expected instance of RedirectBackResponderOptions'
             );
         }
+
         // Extract the Response from options
         $response = $options->response;
 
-        // Add flash messages to redirect back response
-        $flash = $options->flash;
-        $flash['message'] = $response->message();
+        // Flash the toast to the session for the next request
+        $response->toast()->flash();
 
-        // Return the redirect back response
-        return redirect()->back()->with($flash);
+        // If the use case response indicates failure, redirect back with a form-level error message
+        if (!$response->isSuccess()){
+            return back()->withErrors([
+                'form' => $response->message()
+            ])->withInput();
+        }
+
+        // If the operation succeeds, simply redirect back without errors
+        return back();
     }
 }

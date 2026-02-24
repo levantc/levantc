@@ -2,6 +2,7 @@
 
 namespace Sadeem\Core\Module\DTOs;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 use ReflectionClass;
@@ -61,13 +62,43 @@ abstract class DTO
     }
 
     /**
+     * Determine if null values should be filtered out before saving.
+     */
+    public function shouldFilterNulls(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine if the DTO has any non-empty data.
+     *
+     * @param array $exclude Keys to exclude from the check.
+     * @return bool
+     */
+    public function isNotEmpty(array $exclude = ['id', 'model']): bool
+    {
+        foreach ($this->toArray() as $key => $value) {
+            if (in_array($key, $exclude)) {
+                continue;
+            }
+
+            if (!empty($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Create a DTO instance from an Eloquent model.
      *
      * @param Model $model
+     * @param bool $attachModel
      * @return static
      * @throws ReflectionException
      */
-    public static function fromModel(Model $model): static
+    public static function fromModel(Model $model, bool $attachModel = false): static
     {
         // Initialize an array to hold model data
         $data = [];
@@ -79,7 +110,14 @@ abstract class DTO
         // Map model attributes to DTO properties if they exist
         foreach ($properties as $property) {
             if (isset($model->$property)) {
-                $data[$property] = $model->$property;
+                $value = $model->$property;
+
+                // Automatically convert translations collection to array if it exists
+                if ($property === 'translations' && $value instanceof Collection) {
+                    $value = $value->toArray();
+                }
+
+                $data[$property] = $value;
             }
         }
 
@@ -87,12 +125,112 @@ abstract class DTO
         $dto = static::fromArray($data);
 
         // Attach the original model to the DTO (useful for updates)
-        if (property_exists($dto, 'model')) {
+        if ($attachModel && property_exists($dto, 'model')) {
             $dto->setModel($model);
         }
 
         // Return the DTO instance
         return $dto;
+    }
+
+    /**
+     * Check if the current DTO has the required fields for another DTO.
+     *
+     * @param string $targetDtoClass
+     * @param array $additionalData
+     * @return bool
+     * @throws ReflectionException
+     */
+    public function hasRequiredFieldsFor(string $targetDtoClass, array $additionalData = []): bool
+    {
+        if (!is_subclass_of($targetDtoClass, self::class)) {
+            return false;
+        }
+
+        $reflection = new ReflectionClass($targetDtoClass);
+        $constructor = $reflection->getConstructor();
+
+        if (!$constructor) {
+            return true;
+        }
+
+        $data = array_merge($this->toArray(), $additionalData);
+
+        foreach ($constructor->getParameters() as $param) {
+            $name = $param->getName();
+            $type = $param->getType();
+
+            // Skip if the parameter is not required
+            if ($param->isDefaultValueAvailable() || ($type instanceof ReflectionNamedType && $type->allowsNull())) {
+                continue;
+            }
+
+            // If a required field is missing or empty in the data
+            if (!isset($data[$name]) || (is_scalar($data[$name]) && trim((string)$data[$name]) === '') || (is_array($data[$name]) && empty($data[$name]))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the current DTO has any non-empty data for the fields required or present in another DTO.
+     *
+     * @param string $targetDtoClass
+     * @param array $exclude Keys to exclude from the check.
+     * @return bool
+     * @throws ReflectionException
+     */
+    public function hasDataFor(string $targetDtoClass, array $exclude = ['id', 'model']): bool
+    {
+        if (!is_subclass_of($targetDtoClass, self::class)) {
+            return false;
+        }
+
+        $reflection = new ReflectionClass($targetDtoClass);
+        $constructor = $reflection->getConstructor();
+
+        if (!$constructor) {
+            return false;
+        }
+
+        $sourceData = $this->toArray();
+
+        foreach ($constructor->getParameters() as $param) {
+            $name = $param->getName();
+            $type = $param->getType();
+
+            if (in_array($name, $exclude)) {
+                continue;
+            }
+
+            // We only care about fields that are required by the target
+            if ($param->isDefaultValueAvailable() || ($type instanceof ReflectionNamedType && $type->allowsNull())) {
+                continue;
+            }
+
+            if (isset($sourceData[$name]) && !empty($sourceData[$name])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Create a DTO instance from another DTO.
+     *
+     * @param DTO $dto
+     * @param array $additionalData
+     * @return static
+     * @throws ReflectionException
+     */
+    public static function fromDTO(DTO $dto, array $additionalData = []): static
+    {
+        $data = array_merge($dto->toArray(), $additionalData);
+
+        return static::fromArray($data);
     }
 
     /**
@@ -108,7 +246,12 @@ abstract class DTO
      */
     public static function fromArray(array $data): static
     {
-// Create a reflection of the current DTO class
+        // Convert translations to array if it is a collection
+        if (isset($data['translations']) && $data['translations'] instanceof Collection) {
+            $data['translations'] = $data['translations']->toArray();
+        }
+
+        // Create a reflection of the current DTO class
         $class = new ReflectionClass(static::class);
         $constructor = $class->getConstructor();
 
@@ -159,3 +302,4 @@ abstract class DTO
         return $class->newInstanceArgs($params);
     }
 }
+

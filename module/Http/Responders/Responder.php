@@ -38,7 +38,6 @@ abstract class Responder
     {
         return [
             'success' => $response->isSuccess(),
-            'message' => $response->message(),
             'data' => $this->resolveData($response->data),
         ];
     }
