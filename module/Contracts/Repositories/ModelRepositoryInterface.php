@@ -33,7 +33,7 @@ interface ModelRepositoryInterface extends RepositoryInterface
      * Destroy a model using data provided by a DTO.
      *
      * @param DTO $dto Data Transfer Object specific to the operation.
-     * @return Response The destroyed instance.
+     * @return bool The destroyed instance.
      */
-    public function destroy(DTO $dto): Response;
+    public function destroy(DTO $dto): bool;
 }
