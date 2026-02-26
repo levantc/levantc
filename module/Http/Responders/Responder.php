@@ -36,10 +36,30 @@ abstract class Responder
      */
     protected function formatResponse(mixed $response): array
     {
-        return [
-            'success' => $response->isSuccess(),
-            'data' => $this->resolveData($response->data),
-        ];
+        return array_merge(
+            [
+                'success' => $response->isSuccess(),
+                'data' => $this->resolveData($response->data),
+            ],
+            $this->extractProperties($response)
+        );
+    }
+
+    /**
+     * Extract all public properties from the response object, excluding base ones.
+     *
+     * @param mixed $response
+     * @return array
+     */
+    protected function extractProperties(mixed $response): array
+    {
+        $properties = get_object_vars($response);
+
+        // Filter out properties already handled by formatResponse
+        // or internal properties that shouldn't be exposed
+        unset($properties['result'], $properties['data'], $properties['context']);
+
+        return array_map(fn ($value) => $this->resolveData($value), $properties);
     }
 
     /**
