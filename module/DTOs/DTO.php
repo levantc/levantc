@@ -268,14 +268,20 @@ abstract class DTO
             $type = $param->getType();
 
             // Handle nested DTOs if a parameter type is a subclass of DTO
-            if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
+            if ($type instanceof ReflectionNamedType && ! $type->isBuiltin()) {
                 $paramClass = $type->getName();
 
                 if (is_subclass_of($paramClass, DTO::class)) {
-                    // Recursively instantiate nested DTO if data exists, otherwise null
-                    $params[] = isset($data[$name])
-                        ? $paramClass::fromArray($data[$name])
-                        : null;
+                    $value = $data[$name] ?? null;
+
+                    if ($value instanceof Model) {
+                        $params[] = $paramClass::fromModel($value);
+                    } elseif (is_array($value)) {
+                        $params[] = $paramClass::fromArray($value);
+                    } else {
+                        $params[] = $value;
+                    }
+
                     continue;
                 }
             }
