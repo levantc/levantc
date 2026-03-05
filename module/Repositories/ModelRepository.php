@@ -86,7 +86,7 @@ abstract class ModelRepository implements ModelRepositoryInterface
         $model->save();
 
         // Return a fresh DTO instance from the saved model to ensure updated data is reflected
-        return $dto::fromModel($model->fresh());
+        return $dto::fromModel($model->fresh(), true);
     }
 
     /**

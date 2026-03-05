@@ -2,7 +2,7 @@
 
 namespace Sadeem\Core\Module\Helpers;
 
-use Sadeem\I18n\Module\Models\Locale;
+use Sadeem\I18n\Module\Models\Locale\Locale;
 use Carbon\Carbon;
 
 class LocaleHelper
