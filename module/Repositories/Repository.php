@@ -1,9 +1,9 @@
 <?php
 
-namespace Sadeem\Core\Module\Repositories;
+namespace Eta\Core\Module\Repositories;
 
-use Sadeem\Core\Module\Contracts\Repositories\RepositoryInterface;
-use Sadeem\Core\Module\DTOs\DTO;
+use Eta\Core\Module\Contracts\Repositories\RepositoryInterface;
+use Eta\Core\Module\DTOs\DTO;
 use Illuminate\Database\Eloquent\Model;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Listeners;
+namespace Eta\Core\Module\Listeners;
 
-use Sadeem\Core\Module\Events\ShowToast;
+use Eta\Core\Module\Events\ShowToast;
 
 class ShowToastNotification
 {

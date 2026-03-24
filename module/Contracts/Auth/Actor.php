@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Contracts\Auth;
+namespace Eta\Core\Module\Contracts\Auth;
 
 /**
  * Interface Actor

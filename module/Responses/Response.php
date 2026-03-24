@@ -1,13 +1,13 @@
 <?php
 
-namespace Sadeem\Core\Module\Responses;
+namespace Eta\Core\Module\Responses;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Collection;
-use Sadeem\Core\Module\Actions\Feedback\Toast;
-use Sadeem\Core\Module\Contracts\Result\ResultContract;
-use Sadeem\Core\Module\Enums\Actions\Feedback\Variant;
+use Eta\Core\Module\Actions\Feedback\Toast;
+use Eta\Core\Module\Contracts\Result\ResultContract;
+use Eta\Core\Module\Enums\Actions\Feedback\Variant;
 
 /**
  * Context-aware base Response for UseCase operations.

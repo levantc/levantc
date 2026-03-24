@@ -1,8 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Actions;
+namespace Eta\Core\Module\Actions;
 
-use Sadeem\Core\Module\Enums\Actions\Type;
+use Eta\Core\Module\Enums\Actions\Type;
 use InvalidArgumentException;
 
 /**

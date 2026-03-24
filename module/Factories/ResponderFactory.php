@@ -1,13 +1,13 @@
 <?php
 
-namespace Sadeem\Core\Module\Factories;
+namespace Eta\Core\Module\Factories;
 
-use Sadeem\Core\Module\Enums\Responders\ResponderType;
-use Sadeem\Core\Module\Http\Responders\InertiaResponder;
-use Sadeem\Core\Module\Http\Responders\JsonResponder;
-use Sadeem\Core\Module\Http\Responders\RedirectBackResponder;
-use Sadeem\Core\Module\Http\Responders\RedirectToRouteResponder;
-use Sadeem\Core\Module\Http\Responders\Responder;
+use Eta\Core\Module\Enums\Responders\ResponderType;
+use Eta\Core\Module\Http\Responders\InertiaResponder;
+use Eta\Core\Module\Http\Responders\JsonResponder;
+use Eta\Core\Module\Http\Responders\RedirectBackResponder;
+use Eta\Core\Module\Http\Responders\RedirectToRouteResponder;
+use Eta\Core\Module\Http\Responders\Responder;
 
 /**
  * Class ResponderFactory

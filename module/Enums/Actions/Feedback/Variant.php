@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Enums\Actions\Feedback;
+namespace Eta\Core\Module\Enums\Actions\Feedback;
 
 /**
  * Enum ToastVariant

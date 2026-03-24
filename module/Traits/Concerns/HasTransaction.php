@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Traits\Concerns;
+namespace Eta\Core\Module\Traits\Concerns;
 
 use Illuminate\Support\Facades\DB;
 use Throwable;

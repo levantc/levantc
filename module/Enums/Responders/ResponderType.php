@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Enums\Responders;
+namespace Eta\Core\Module\Enums\Responders;
 
 /**
  * Enum ResponderType

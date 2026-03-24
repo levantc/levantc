@@ -1,10 +1,10 @@
 <?php
-namespace Sadeem\Core\Module\Services;
+namespace Eta\Core\Module\Services;
 
-use Sadeem\Core\Module\Contracts\Services\ServiceContract;
-use Sadeem\Core\Module\DTOs\DTO;
-use Sadeem\Core\Module\Responses\Response;
-use Sadeem\Core\Module\Traits\Concerns\HasTransaction;
+use Eta\Core\Module\Contracts\Services\ServiceContract;
+use Eta\Core\Module\DTOs\DTO;
+use Eta\Core\Module\Responses\Response;
+use Eta\Core\Module\Traits\Concerns\HasTransaction;
 
 /**
  * Class Service

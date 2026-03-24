@@ -1,9 +1,9 @@
 <?php
 
-namespace Sadeem\Core\Module\Http\Responders;
+namespace Eta\Core\Module\Http\Responders;
 
-use Sadeem\Core\Module\Http\Responders\Options\RedirectToRouteResponderOptions;
-use Sadeem\Core\Module\Http\Responders\Options\ResponderOptions;
+use Eta\Core\Module\Http\Responders\Options\RedirectToRouteResponderOptions;
+use Eta\Core\Module\Http\Responders\Options\ResponderOptions;
 use Illuminate\Http\RedirectResponse;
 use InvalidArgumentException;
 

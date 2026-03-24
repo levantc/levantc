@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Contracts\Repositories;
+namespace Eta\Core\Module\Contracts\Repositories;
 
 interface RepositoryInterface
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Sadeem\Core\Module\Http\Controllers;
+namespace Eta\Core\Module\Http\Controllers;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
-use Sadeem\Core\Module\Contracts\UseCases\UseCaseContract;
-use Sadeem\Core\Module\DTOs\DTO;
-use Sadeem\Core\Module\Enums\Responders\ResponderType;
-use Sadeem\Core\Module\Factories\ResponderFactory;
-use Sadeem\Core\Module\Factories\UseCaseFactory;
-use Sadeem\Core\Module\Http\Responders\Options\InertiaResponderOptions;
-use Sadeem\Core\Module\Http\Responders\Options\RedirectBackResponderOptions;
-use Sadeem\Core\Module\Http\Responders\Options\RedirectToRouteResponderOptions;
-use Sadeem\Core\Module\Http\Responders\Responder;
+use Eta\Core\Module\Contracts\UseCases\UseCaseContract;
+use Eta\Core\Module\DTOs\DTO;
+use Eta\Core\Module\Enums\Responders\ResponderType;
+use Eta\Core\Module\Factories\ResponderFactory;
+use Eta\Core\Module\Factories\UseCaseFactory;
+use Eta\Core\Module\Http\Responders\Options\InertiaResponderOptions;
+use Eta\Core\Module\Http\Responders\Options\RedirectBackResponderOptions;
+use Eta\Core\Module\Http\Responders\Options\RedirectToRouteResponderOptions;
+use Eta\Core\Module\Http\Responders\Responder;
 
 /**
  * @property $useCaseClass

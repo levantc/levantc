@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Traits\Modules;
+namespace Eta\Core\Module\Traits\Modules;
 
 use Illuminate\Support\Str;
 

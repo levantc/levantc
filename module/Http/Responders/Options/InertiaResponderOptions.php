@@ -1,8 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Http\Responders\Options;
+namespace Eta\Core\Module\Http\Responders\Options;
 
-use Sadeem\Core\Module\Responses\Response;
+use Eta\Core\Module\Responses\Response;
 
 /**
  * Class InertiaResponderOptions

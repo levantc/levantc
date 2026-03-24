@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Model;
+namespace Eta\Core\Module\Model;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User;

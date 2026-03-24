@@ -1,15 +1,15 @@
 <?php
 
-namespace Sadeem\Core\Module\Repositories;
+namespace Eta\Core\Module\Repositories;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use LogicException;
 use ReflectionException;
-use Sadeem\Core\Module\Contracts\Repositories\ModelRepositoryInterface;
-use Sadeem\Core\Module\DTOs\DTO;
-use Sadeem\I18n\Module\Enums\Language\UseCases\DestroyLanguageResult;
-use Sadeem\I18n\Module\Responses\Language\UseCases\DestroyLanguageResponse;
+use Eta\Core\Module\Contracts\Repositories\ModelRepositoryInterface;
+use Eta\Core\Module\DTOs\DTO;
+use Eta\I18n\Module\Enums\Language\UseCases\DestroyLanguageResult;
+use Eta\I18n\Module\Responses\Language\UseCases\DestroyLanguageResponse;
 
 /**
  * Class Repository

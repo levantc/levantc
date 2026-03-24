@@ -1,8 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Traits\Console;
+namespace Eta\Core\Module\Traits\Console;
 
-use Sadeem\Core\Module\Traits\Modules\ModuleCatalog;
+use Eta\Core\Module\Traits\Modules\ModuleCatalog;
 
 /**
  * Trait: ChoosesModule

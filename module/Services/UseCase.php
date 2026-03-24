@@ -1,10 +1,10 @@
 <?php
-namespace Sadeem\Core\Module\Services;
+namespace Eta\Core\Module\Services;
 
-use Sadeem\Core\Module\DTOs\DTO;
-use Sadeem\Core\Module\Factories\RepositoryFactory;
-use Sadeem\Core\Module\Responses\Response;
-use Sadeem\Core\Module\Contracts\UseCases\UseCaseContract;
+use Eta\Core\Module\DTOs\DTO;
+use Eta\Core\Module\Factories\RepositoryFactory;
+use Eta\Core\Module\Responses\Response;
+use Eta\Core\Module\Contracts\UseCases\UseCaseContract;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace Sadeem\Core\Module\Contracts\Repositories;
+namespace Eta\Core\Module\Contracts\Repositories;
 
-use Sadeem\Core\Module\DTOs\DTO;
+use Eta\Core\Module\DTOs\DTO;
 use Illuminate\Database\Eloquent\Model;
-use Sadeem\Core\Module\Responses\Response;
+use Eta\Core\Module\Responses\Response;
 
 /**
  * RepositoryInterface

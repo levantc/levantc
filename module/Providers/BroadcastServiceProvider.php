@@ -1,5 +1,5 @@
 <?php
-namespace Sadeem\Core\Module\Providers;
+namespace Eta\Core\Module\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;

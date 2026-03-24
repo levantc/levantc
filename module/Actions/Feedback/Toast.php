@@ -1,10 +1,10 @@
 <?php
 
-namespace Sadeem\Core\Module\Actions\Feedback;
+namespace Eta\Core\Module\Actions\Feedback;
 
-use Sadeem\Core\Module\Actions\Action;
-use Sadeem\Core\Module\Enums\Actions\Feedback\Variant;
-use Sadeem\Core\Module\Events\ShowToast;
+use Eta\Core\Module\Actions\Action;
+use Eta\Core\Module\Enums\Actions\Feedback\Variant;
+use Eta\Core\Module\Events\ShowToast;
 
 /**
  * Class Toast

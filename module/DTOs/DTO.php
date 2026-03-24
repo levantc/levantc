@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\DTOs;
+namespace Eta\Core\Module\DTOs;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

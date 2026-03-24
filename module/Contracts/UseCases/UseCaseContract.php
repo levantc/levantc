@@ -1,8 +1,8 @@
 <?php
-namespace Sadeem\Core\Module\Contracts\UseCases;
+namespace Eta\Core\Module\Contracts\UseCases;
 
-use Sadeem\Core\Module\DTOs\DTO;
-use Sadeem\Core\Module\Responses\Response;
+use Eta\Core\Module\DTOs\DTO;
+use Eta\Core\Module\Responses\Response;
 
 /**
  * UseCaseContract

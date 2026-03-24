@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Traits\Stubs;
+namespace Eta\Core\Module\Traits\Stubs;
 
 use Illuminate\Support\Str;
 

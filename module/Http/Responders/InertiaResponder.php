@@ -1,9 +1,9 @@
 <?php
 
-namespace Sadeem\Core\Module\Http\Responders;
+namespace Eta\Core\Module\Http\Responders;
 
-use Sadeem\Core\Module\Http\Responders\Options\InertiaResponderOptions;
-use Sadeem\Core\Module\Http\Responders\Options\ResponderOptions;
+use Eta\Core\Module\Http\Responders\Options\InertiaResponderOptions;
+use Eta\Core\Module\Http\Responders\Options\ResponderOptions;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 

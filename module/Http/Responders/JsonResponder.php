@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Http\Responders;
+namespace Eta\Core\Module\Http\Responders;
 
 use Illuminate\Http\JsonResponse;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Contracts\Result;
+namespace Eta\Core\Module\Contracts\Result;
 
-use Sadeem\Core\Module\Enums\Actions\Feedback\Variant;
+use Eta\Core\Module\Enums\Actions\Feedback\Variant;
 
 /**
  * Interface resultInterface

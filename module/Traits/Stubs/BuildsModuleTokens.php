@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Traits\Stubs;
+namespace Eta\Core\Module\Traits\Stubs;
 
 use Illuminate\Support\Str;
 
@@ -22,7 +22,7 @@ trait BuildsModuleTokens
 
         $moduleLabel = (string) ($moduleMeta['label'] ?? Str::studly($moduleKey));
         $moduleFolder = (string) ($moduleMeta['folder'] ?? $moduleKey);
-        $moduleNamespace = (string) ($moduleMeta['namespace'] ?? ('Sadeem\\' . Str::studly($moduleKey)));
+        $moduleNamespace = (string) ($moduleMeta['namespace'] ?? ('Eta\\' . Str::studly($moduleKey)));
 
         // Naming variants
         $moduleStudly = Str::studly($moduleKey);    // Geography
@@ -49,7 +49,7 @@ trait BuildsModuleTokens
             '{{moduleKey}}'       => $moduleKey,        // geography
             '{{moduleLabel}}'     => $moduleLabel,      // Geography
             '{{moduleFolder}}'    => $moduleFolder,     // geography
-            '{{moduleNamespace}}' => $moduleNamespace,  // Sadeem\Geography
+            '{{moduleNamespace}}' => $moduleNamespace,  // Eta\Geography
 
             /**
              * Naming variants (frontend/backend friendly)

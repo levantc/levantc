@@ -1,8 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Helpers;
+namespace Eta\Core\Module\Helpers;
 
-use Sadeem\I18n\Module\Models\Locale\Locale;
+use Eta\I18n\Module\Models\Locale\Locale;
 use Carbon\Carbon;
 
 class LocaleHelper

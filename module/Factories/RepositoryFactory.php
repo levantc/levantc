@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Factories;
+namespace Eta\Core\Module\Factories;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;

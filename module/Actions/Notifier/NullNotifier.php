@@ -1,8 +1,8 @@
 <?php
 
-namespace Sadeem\Core\Module\Actions\Notifier;
+namespace Eta\Core\Module\Actions\Notifier;
 
-use Sadeem\Core\Module\Actions\Feedback\Toast;
+use Eta\Core\Module\Actions\Feedback\Toast;
 
 /**
  * Null implementation of Notifier.

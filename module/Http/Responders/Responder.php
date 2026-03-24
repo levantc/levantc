@@ -1,11 +1,11 @@
 <?php
 
-namespace Sadeem\Core\Module\Http\Responders;
+namespace Eta\Core\Module\Http\Responders;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use InvalidArgumentException;
-use Sadeem\Core\Module\Http\Responders\Options\ResponderOptions;
+use Eta\Core\Module\Http\Responders\Options\ResponderOptions;
 
 /**
  * Class Responder

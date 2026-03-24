@@ -1,6 +1,6 @@
 {
-    "name": "sadeem/core",
-    "description": "Core module for Sadeem project providing essential services, base infrastructure, shared DTOs, Repositories, Providers, and reusable utilities to all other modules.",
+    "name": "eta/core",
+    "description": "Core module for Eta project providing essential services, base infrastructure, shared DTOs, Repositories, Providers, and reusable utilities to all other modules.",
     "minimum-stability": "stable",
     "license": "proprietary",
     "authors": [
@@ -11,14 +11,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "Sadeem\\Core\\": "",
-            "Sadeem\\Core\\Module\\": "module"
+            "Eta\\Core\\": "",
+            "Eta\\Core\\Module\\": "module"
         },
         "files": []
     },
     "autoload-dev": {
         "psr-4": {
-            "Sadeem\\Core\\Tests\\": "tests/"
+            "Eta\\Core\\Tests\\": "tests/"
         }
     },
     "require": {},

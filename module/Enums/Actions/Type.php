@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Enums\Actions;
+namespace Eta\Core\Module\Enums\Actions;
 
 /**
  * Enum ActionType

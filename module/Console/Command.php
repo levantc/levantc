@@ -1,14 +1,14 @@
 <?php
 
-namespace Sadeem\Core\Module\Console;
+namespace Eta\Core\Module\Console;
 
 use Illuminate\Console\Command as LaravelCommand;
-use Sadeem\Core\Module\Traits\Console\BuildsStatusLine;
-use Sadeem\Core\Module\Traits\Console\ChoosesModule;
-use Sadeem\Core\Module\Traits\Console\HasCliOutput;
-use Sadeem\Core\Module\Traits\Console\NormalizesUtf8Input;
-use Sadeem\Core\Module\Traits\Stubs\BuildsModelTokens;
-use Sadeem\Core\Module\Traits\Stubs\BuildsModuleTokens;
+use Eta\Core\Module\Traits\Console\BuildsStatusLine;
+use Eta\Core\Module\Traits\Console\ChoosesModule;
+use Eta\Core\Module\Traits\Console\HasCliOutput;
+use Eta\Core\Module\Traits\Console\NormalizesUtf8Input;
+use Eta\Core\Module\Traits\Stubs\BuildsModelTokens;
+use Eta\Core\Module\Traits\Stubs\BuildsModuleTokens;
 
 /**
  * Abstract Class: Command (Base CLI Command)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Model;
+namespace Eta\Core\Module\Model;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 

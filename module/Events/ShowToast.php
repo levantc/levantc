@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Events;
+namespace Eta\Core\Module\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -8,7 +8,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Sadeem\Core\Module\Actions\Feedback\Toast;
+use Eta\Core\Module\Actions\Feedback\Toast;
 
 class ShowToast implements ShouldBroadcastNow
 {

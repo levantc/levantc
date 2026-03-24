@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\DTOs;
+namespace Eta\Core\Module\DTOs;
 
 /**
  * Base Data Transfer Object.

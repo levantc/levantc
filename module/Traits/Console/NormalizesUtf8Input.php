@@ -1,6 +1,6 @@
 <?php
 
-namespace Sadeem\Core\Module\Traits\Console;
+namespace Eta\Core\Module\Traits\Console;
 
 /**
  * Trait NormalizesUtf8Input

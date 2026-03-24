@@ -1,9 +1,9 @@
 <?php
-namespace Sadeem\Core\Module\Providers;
+namespace Eta\Core\Module\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Sadeem\Core\Module\Factories\RepositoryFactory;
-use Sadeem\Core\Module\Factories\UseCaseFactory;
+use Eta\Core\Module\Factories\RepositoryFactory;
+use Eta\Core\Module\Factories\UseCaseFactory;
 
 class ModuleServiceProvider extends ServiceProvider
 {
