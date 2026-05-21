@@ -1,10 +1,15 @@
 <?php
 
-namespace Tests;
+namespace Levantc\Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Tests\TestCase as PlatformTestCase;
 
-abstract class TestCase extends BaseTestCase
+/**
+ * Base test case for the LevantC foundation module.
+ *
+ * Tests run against the host Laravel application — not an isolated package runtime.
+ */
+abstract class TestCase extends PlatformTestCase
 {
     //
 }
