@@ -1,0 +1,40 @@
+name: Feature Request
+description: Propose an improvement to the LevantC foundation layer
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposals should align with Levantc as the **platform foundation layer**, not domain-specific product logic. Questions? Email [founder.muath@levantc.io](mailto:founder.muath@levantc.io).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What platform or modular architecture need does this address?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This belongs in the foundation layer (shared by future modules), not a domain module
+          required: true

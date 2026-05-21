@@ -1,0 +1,48 @@
+name: Bug Report
+description: Report a defect in the LevantC foundation layer
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve **levantc/levantc**. For security issues, email [founder.muath@levantc.io](mailto:founder.muath@levantc.io) — do not file a public issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What went wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce the behavior?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: PHP version, Laravel version, `composer show levantc/levantc` output, platform commit if known
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact email (optional)
+      description: We may reach you at founder.muath@levantc.io for follow-up; provide your email if you prefer a direct reply.
+      placeholder: you@example.com

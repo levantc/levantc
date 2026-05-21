@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: LevantC Contact
+    url: mailto:founder.muath@levantc.io
+    about: Official contact for support, security, partnerships, and conduct inquiries.
+  - name: Security Policy
+    url: https://github.com/levantc/levantc/blob/main/SECURITY.md
+    about: Read how to report vulnerabilities privately (do not use public issues).
