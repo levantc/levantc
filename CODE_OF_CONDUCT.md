@@ -1,27 +1,31 @@
-# Code of Conduct — LevantC Engineering
+# Code of Conduct
 
-## Our commitment
+## Our pledge
 
-LevantC maintains a professional, inclusive engineering culture across the platform monorepo, module repositories, code review, and community channels. The **Levantc foundation layer** is shared infrastructure—collaboration here should reflect the standards we expect across the entire ecosystem.
+We are committed to providing a welcoming, professional, and inclusive environment for everyone who participates in the LevantC project—contributors, maintainers, users, and partners.
 
 ## Expected behavior
 
-- Use constructive, technically focused language in reviews
-- Assume good intent; clarify before escalating
-- Welcome contributors of diverse experience levels
-- Credit others’ work appropriately
-- Protect proprietary and customer-related information
+- Be respectful, considerate, and constructive in all interactions.
+- Welcome diverse perspectives, backgrounds, and skill levels.
+- Give and receive feedback professionally; focus on ideas and outcomes.
+- Assume good intentions and collaborate toward shared improvement.
+- Follow project guidelines in [Contributing](CONTRIBUTING.md) and related documentation.
 
 ## Unacceptable behavior
 
-- Harassment, discrimination, or personal attacks
-- Threats, intimidation, or sustained disruption
-- Publishing private information without consent
-- Retaliation against good-faith reports
+The following is not tolerated:
 
-## Scope
+- Harassment, intimidation, or personal attacks
+- Discriminatory language or behavior (including based on race, gender, identity, religion, nationality, disability, age, or experience level)
+- Sexualized language or imagery, or unwelcome sexual attention
+- Trolling, insults, or deliberately inflammatory communication
+- Publishing others' private information without consent
+- Any conduct that would be inappropriate in a professional workplace
 
-This Code of Conduct applies to work on **`levantc/levantc`**, related platform repositories, and official representation of LevantC engineering.
+## Enforcement
+
+Project maintainers may remove, edit, or reject comments, commits, issues, or contributions that violate this Code of Conduct. Repeated or severe violations may result in temporary or permanent exclusion from project spaces.
 
 ## Reporting
 
@@ -29,12 +33,12 @@ If you witness or experience unacceptable behavior, report it privately to:
 
 **[founder.muath@levantc.io](mailto:founder.muath@levantc.io)**
 
-Reports are reviewed confidentially. Retaliation against anyone who reports in good faith is prohibited.
+Reports will be reviewed confidentially. Retaliation against anyone who reports in good faith is prohibited.
 
-## Enforcement
+## Scope
 
-Maintainers may warn, restrict access, or take further action as warranted.
+This Code of Conduct applies within the **levantc/levantc** repository, issue trackers, pull requests, and official LevantC communication channels related to this codebase.
 
-## Updates
+## Attribution
 
-The version in this repository is authoritative.
+This policy is adapted from common open-source community standards for professional conduct and inclusivity.

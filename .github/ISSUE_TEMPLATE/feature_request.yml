@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Proposals should align with Levantc as the **platform foundation layer**, not domain-specific product logic. Questions? Email [founder.muath@levantc.io](mailto:founder.muath@levantc.io).
+        Proposals should align with Levantc as the **platform foundation layer**, not domain-specific product logic. See [ARCHITECTURE.md](../../ARCHITECTURE.md) and [ROADMAP.md](../../ROADMAP.md). Questions: [founder.muath@levantc.io](mailto:founder.muath@levantc.io).
 
   - type: textarea
     id: problem

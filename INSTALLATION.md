@@ -1,42 +1,57 @@
-# Installation — LevantC Foundation Layer
+# Installation
 
-**`levantc/levantc`** is the platform’s **foundation module**. It integrates into the LevantC Laravel application as a Git submodule and Composer dependency—not as an isolated package with its own vendor ecosystem.
+This guide covers integrating the **LevantC Foundation Layer** (`levantc/levantc`) into the LevantC Web Platform for development or testing.
 
-## Architectural model
+The foundation module is **not** installed as an isolated Composer package with its own `vendor/` tree. It integrates into the host Laravel application through a Git submodule and the platform root `composer.json`.
 
-| Aspect | Levantc behavior |
-|--------|------------------|
-| Dependency resolution | Host platform `composer.json` + root `vendor/` |
-| Runtime | Host Laravel application |
-| Autoloading | Merged via Composer when `levantc/levantc` is required |
-| Testing | Host `php artisan test` / Pest from platform root |
-| Isolation | **Not** a standalone framework or micro-runtime |
+## Prerequisites
 
-## Requirements
+Satisfied by the **host platform** environment:
 
-Satisfied by the **host platform**, not by running Composer inside `modules/levantc/`:
+| Requirement | Version / notes |
+|-------------|-----------------|
+| **PHP** | >= 8.5 (`pdo_pgsql`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`) |
+| **Composer** | 2.x — run at platform repository root |
+| **Laravel** | 13.x |
+| **PostgreSQL** | Required by the LevantC Web Platform |
+| **Git** | Submodule management |
+| **Node.js** | LTS — for platform frontend tooling when running full stack |
 
-| Requirement | Version |
-|-------------|---------|
-| PHP | ^8.5 |
-| Laravel | 13.x |
-| Composer | 2.x (platform root) |
-| Inertia (for Inertia responders) | ^3.0 on host |
-| Broadcasting (optional, for live toasts) | Reverb, Pusher, or compatible |
+Optional on the host for full foundation features:
 
-## Platform integration (primary workflow)
+- **inertiajs/inertia-laravel** ^3.0 — Inertia responders
+- **Broadcasting** — Reverb or compatible driver for live toast events
 
-### 1. Initialize the submodule
+For full platform setup, see the main repository [Installation](https://github.com/levantc/platform/blob/main/INSTALLATION.md).
 
-From the platform repository root:
+## 1. Clone the platform repository
+
+```bash
+git clone git@github.com:<username>/<levantc-platform-repo>.git
+cd <levantc-platform-repo>
+```
+
+Replace `<username>` and `<levantc-platform-repo>` with your GitHub username and platform repository name.
+
+## 2. Initialize the foundation submodule
 
 ```bash
 git submodule update --init --recursive modules/levantc
 ```
 
-### 2. Require the foundation module in the host Composer file
+Verify `.gitmodules` lists the foundation module:
 
-The platform `composer.json` should include a path repository and require the core:
+```bash
+cat .gitmodules
+```
+
+Expected path: `modules/levantc` → `git@github.com:levantc/levantc.git`
+
+> For the complete submodule workflow and progressive module integration, see [Modules](https://github.com/levantc/platform/blob/main/MODULES.md).
+
+## 3. Require the foundation package
+
+Ensure the platform `composer.json` includes a path repository and requires the foundation layer:
 
 ```json
 {
@@ -53,15 +68,15 @@ The platform `composer.json` should include a path repository and require the co
 }
 ```
 
-### 3. Install dependencies at the platform root
+## 4. Install backend dependencies
+
+From the **platform repository root**:
 
 ```bash
 composer update levantc/levantc
 ```
 
-This merges PSR-4 autoloading for `Levantc\` and registers Laravel service providers via package discovery.
-
-### 4. Verify discovery and autoload
+## 5. Verify package discovery and autoload
 
 ```bash
 php artisan package:discover
@@ -71,60 +86,69 @@ php -r "echo class_exists('Levantc\\Factories\\UseCaseFactory') ? 'ok' : 'missin
 
 Expected output: `ok`.
 
-## Configuration
+Confirm discovery:
 
-Publish foundation configuration from the **host** application when using locale helpers:
+```bash
+composer show levantc/levantc
+```
+
+## 6. Environment configuration
+
+Publish foundation configuration when using locale helpers or overrides:
 
 ```bash
 php artisan vendor:publish --tag=levantc-config
 ```
 
-Optional `.env` when a domain module provides the Locale model:
+Optional `.env` entry when a domain module provides the Locale model:
 
 ```env
 LEVANTC_LOCALE_MODEL="Your\\Module\\Models\\Locale"
 ```
 
-## Application wiring
+Configure remaining variables per the platform `.env.example` (database, mail, broadcasting, and module-specific keys).
 
-1. Confirm `levantc/levantc` appears in `composer.lock` at the platform root.
-2. Extend module controllers from `Levantc\Http\Controllers\Controller`.
-3. Register **domain** module service providers in the host bootstrap—not inside Levantc.
-4. For broadcast toasts, wire `Levantc\Listeners\ShowToastNotification` to `Levantc\Events\ShowToast` in the host `EventServiceProvider`.
+## 7. Application wiring
 
-`Levantc\Providers\BroadcastServiceProvider` registers broadcast routes when discovered; the host still owns `routes/channels.php`.
+1. Extend domain controllers from `Levantc\Http\Controllers\Controller`.
+2. Register **domain** module service providers in the host bootstrap—not inside the foundation layer.
+3. For broadcast toasts, register `Levantc\Listeners\ShowToastNotification` for `Levantc\Events\ShowToast` in the host `EventServiceProvider`.
+4. Ensure `routes/channels.php` exists on the host when using `BroadcastServiceProvider`.
 
-## Testing
+## 8. Testing
 
-Run tests from the **platform root** only:
+Run foundation tests from the **platform root**:
 
 ```bash
 php artisan test --compact --testsuite=Levantc
 ```
 
-Or the full suite (includes foundation tests):
+Run the full platform suite when validating broader integration:
 
 ```bash
 php artisan test --compact
 ```
 
-Do **not** rely on `composer install` inside `modules/levantc/` for development. That directory has no independent vendor architecture by design.
+> **Note:** Do not run `composer install` inside `modules/levantc/` for routine development. Dependencies resolve through the host application.
 
-## Submodule-only repository checkout
+## Verification
 
-When working in the `levantc/levantc` repository alone (for example, CI on the module repo), clone the **platform** repository or use a workspace that includes the host Laravel app so tests and dependencies resolve through the parent project.
+- `levantc/levantc` appears in `composer.lock` at the platform root.
+- `php artisan package:discover` lists `levantc/levantc`.
+- Foundation Pest tests pass via `--testsuite=Levantc`.
 
 ## Troubleshooting
 
 | Symptom | Likely cause | Resolution |
 |---------|--------------|------------|
-| Class `Levantc\...` not found | Path repo or require missing | Add repository + `levantc/levantc`; `composer update` at platform root |
-| Provider not registered | Discovery disabled | Check `extra.laravel` in module `composer.json`; run `package:discover` |
-| Tests fail in module folder | Isolated test run | Run `php artisan test` from platform root |
-| `LocaleHelper` error | `locale_model` unset | Publish config; set `LEVANTC_LOCALE_MODEL` |
-| Inertia responder error | Inertia not on host | Ensure `inertiajs/inertia-laravel` in platform `composer.json` |
+| Class `Levantc\...` not found | Path repo or require missing | Add repository and `levantc/levantc`; `composer update` at platform root |
+| Provider not registered | Discovery issue | Run `php artisan package:discover`; verify `extra.laravel` in module `composer.json` |
+| Tests fail in module directory | Isolated test execution | Run tests from platform root only |
+| `LocaleHelper` runtime error | `locale_model` unset | Publish config; set `LEVANTC_LOCALE_MODEL` |
+| Inertia responder error | Inertia not on host | Require `inertiajs/inertia-laravel` in platform `composer.json` |
 
-## Next steps
+## Related documentation
 
-- [README.md](README.md) — foundation layer overview and ecosystem vision
-- [CONTRIBUTING.md](CONTRIBUTING.md) — development workflow on the platform monorepo
+- [Foundation Overview](OVERVIEW.md)
+- [Architecture](ARCHITECTURE.md)
+- [Contributing](CONTRIBUTING.md)

@@ -1,30 +1,30 @@
-# Contact — LevantC Foundation Layer
+# Contact
 
-LevantC maintains a **centralized communication channel** at this stage of the platform. Use one address for support, security, partnerships, conduct concerns, and maintainer inquiries.
-
-## Official contact
+LevantC uses a **single official contact** for support, security, partnerships, and collaboration at this stage of the platform:
 
 **[founder.muath@levantc.io](mailto:founder.muath@levantc.io)**
 
-- Technical support and integration questions
-- Security vulnerability reports (see [SECURITY.md](SECURITY.md) — do not use public issues)
-- Partnership and licensing inquiries
-- Code of conduct reports
-- Contributor and maintainer communication
-
-Include relevant context (platform version, `composer show levantc/levantc`, reproduction steps, or PR links) so we can respond efficiently.
-
-## Documentation
-
-- [README.md](README.md) — Foundation layer overview
-- [INSTALLATION.md](INSTALLATION.md) — Platform integration
-- [CONTRIBUTING.md](CONTRIBUTING.md) — Contribution workflow
-
-## Project links
-
 - **Website:** [https://www.levantc.io](https://www.levantc.io)
-- **Issues:** [https://github.com/levantc/levantc/issues](https://github.com/levantc/levantc/issues)
-- **Pull requests:** [https://github.com/levantc/levantc/pulls](https://github.com/levantc/levantc/pulls)
+
+## Inquiries
+
+Use the address above for:
+
+- Foundation layer integration and technical questions
+- Security vulnerability reports (see [Security Policy](SECURITY.md)—do not use public issue trackers)
+- Licensing and partnership discussions
+- Code of conduct reports
+- Contribution and maintainer communication
+
+Include relevant context (platform version, `composer show levantc/levantc`, reproduction steps, or PR links) for efficient follow-up.
+
+## Security reports
+
+For vulnerability reports, follow [Security Policy](SECURITY.md). **Do not** send security details to public issue trackers.
+
+## Contributing
+
+To contribute code or documentation, see [Contributing](CONTRIBUTING.md).
 
 ## Maintainer
 
@@ -32,11 +32,4 @@ Include relevant context (platform version, `composer show levantc/levantc`, rep
 |------|------|---------|
 | Founder & Lead Engineer | Muath R Abu Ouda | [founder.muath@levantc.io](mailto:founder.muath@levantc.io) |
 
-## Response targets
-
-| Type | Target |
-|------|--------|
-| All inquiries | Acknowledgment within 5 business days |
-| Security reports | Initial assessment within 15 business days |
-
-These are operational targets, not contractual SLAs. Additional contact addresses may be introduced as the ecosystem scales.
+We welcome your feedback and look forward to connecting with you.

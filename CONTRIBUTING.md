@@ -1,55 +1,90 @@
-# Contributing — LevantC Foundation Layer
+# Contributing
 
-Contributions to **`levantc/levantc`** shape the **central dependency root** of the LevantC modular platform. Changes must preserve Laravel-native integration, foundation-layer boundaries, and stability for all future modules.
+Thank you for contributing to the **LevantC Foundation Layer** (`levantc/levantc`). Following this guide keeps the ecosystem consistent, testable, and aligned with the LevantC Web Platform engineering standards.
 
-## What you are contributing to
+## Scope of this repository
 
-Levantc is:
+Contributions here affect the **shared system kernel**—not domain product features. Auth, Billing, Teams, and similar capabilities belong in future domain module repositories.
 
-- The **platform core** module—not a generic Packagist library
-- The **foundation layer** future modules (`Levantc\Auth`, `Levantc\Billing`, …) depend on
-- A **shared system kernel** loaded by the host Laravel application
-- **Not** a framework replacement or isolated runtime
+Before opening a PR, read [Foundation Overview](OVERVIEW.md) and [Architecture](ARCHITECTURE.md).
 
-Develop against the **platform monorepo** with the submodule checked out at `modules/levantc`.
+## Branch strategy
 
-## Before you start
+- **`main`** — Stable foundation integration branch.
+- **Feature branches** — Create from `main` with descriptive names (e.g. `feat/responder-options`, `fix/use-case-factory-binding`).
 
-1. Read [README.md](README.md) for architectural positioning.
-2. Search existing issues and pull requests.
-3. For significant changes, discuss scope before large refactors.
+Workflow:
 
-## Branching strategy
+1. Fork or branch from `main` in the **levantc** repository.
+2. Implement and test against the **platform monorepo** (submodule checkout).
+3. Push and open a PR with a clear description and test plan.
+4. After merge, update the platform submodule pointer when integrating into the main application.
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Stable foundation integration |
-| `feature/<description>` | New shared infrastructure |
-| `fix/<description>` | Bug fixes |
-| `chore/<description>` | Docs, tooling |
-
-Rebase onto latest `main` before opening a pull request.
+> Platform-wide contributions targeting the Silent Core follow the main repository [Contributing](https://github.com/levantc/platform/blob/main/CONTRIBUTING.md) guide (`develop` branch workflow).
 
 ## Pull request workflow
 
-1. Branch from `main` in the **levantc** repository (submodule).
-2. Implement focused changes with tests in `tests/`.
-3. From the **platform root**, run:
-   ```bash
-   php artisan test --compact --testsuite=Levantc
-   vendor/bin/pint modules/levantc
-   ```
-4. Open a PR describing **why**, breaking changes, and test plan.
-5. After merge, update the platform submodule pointer when integrating.
+1. **Scope your work** — One logical change per PR; respect foundation-layer boundaries.
+2. **Test before opening** — See [Testing requirements](#testing-requirements).
+3. **Write a clear PR description** — What changed, why, and how to verify. Note impact on downstream modules.
+4. **Respond to review** — Address feedback with focused follow-up commits.
 
-## Coding standards
+## Commit convention
 
-- **PHP 8.5+** with explicit types and readonly value objects where appropriate
-- **PSR-4** — all production code under `Levantc\` in `src/`
-- **Laravel conventions** — providers, container, Eloquent alignment with the host
-- **Foundation-only** — no Auth, Billing, or other domain logic in this module
-- **No isolated package patterns** — avoid Testbench-only assumptions, duplicate framework abstractions, or module-local `vendor/` workflows
-- **PHPDoc** for non-obvious contracts; avoid noise comments
+Use [Conventional Commits](https://www.conventionalcommits.org/) style:
+
+```text
+type(scope): Short and clear description
+```
+
+### Types
+
+| Type | Use for |
+|------|---------|
+| `feat` | New foundation capability or extension point |
+| `fix` | Bug fixes in shared infrastructure |
+| `refactor` | Restructuring without behavior change |
+| `docs` | Documentation only |
+| `test` | Adding or updating tests |
+| `chore` | Maintenance, tooling, non-behavior config |
+
+### Examples
+
+```text
+feat(responders): add query parameter support to redirect options
+fix(providers): correct UseCaseFactory singleton registration
+docs(installation): align submodule steps with platform guide
+refactor(dto): simplify null filtering contract
+```
+
+## Testing requirements before PR
+
+All PRs must include passing tests for affected behavior. From the **platform repository root**:
+
+```bash
+php artisan test --compact --testsuite=Levantc
+```
+
+Format changed PHP:
+
+```bash
+vendor/bin/pint modules/levantc
+```
+
+Guidelines:
+
+- Add or update **Pest** tests under `modules/levantc/tests/`.
+- Tests run through the host Laravel application—not an isolated package runtime.
+- Use existing conventions; avoid brittle assertions.
+- Do not delete tests without maintainer approval.
+
+## Code style and quality
+
+- **PHP** — Follow [PSR-12](https://www.php-fig.org/psr/psr-12/). Run Pint on changed files.
+- **PSR-4** — Production code under `Levantc\` in `src/`.
+- **Modularity** — No domain product logic in the foundation layer.
+- **Laravel alignment** — Prefer framework conventions over parallel abstractions.
+- **Documentation** — Update relevant docs when integration, structure, or public APIs change.
 
 ## Architecture consistency
 
@@ -57,45 +92,25 @@ Rebase onto latest `main` before opening a pull request.
 |-------|------|
 | Controllers | Delegate to use cases; no business rules |
 | Use cases | Return `Levantc\Responses\Response` (or typed subclasses) |
-| Repositories | Map models to DTOs; do not leak Eloquent past repository boundaries |
+| Repositories | Map Eloquent to DTOs; do not leak models past repository boundaries |
 | Responders | Translate responses to HTTP/Inertia/JSON |
-| New contracts | Place in `src/Contracts/`; no imports from future domain modules |
+| Contracts | New shared interfaces live in `src/Contracts/` |
 
-## Testing expectations
+## Reporting issues
 
-- Tests live in `modules/levantc/tests/`
-- Execute from the **host platform** test harness
-- Every behavioral change includes or updates Pest tests
-- Do not delete tests without maintainer approval
+1. **Search** existing issues for duplicates.
+2. **Title** — Clear, specific summary.
+3. **Body** — Steps to reproduce, expected vs. actual behavior, PHP/Laravel versions, `composer show levantc/levantc` output.
+4. **Labels** — Use `bug`, `enhancement`, or `question` when available.
 
-```bash
-# From platform repository root
-php artisan test --compact --testsuite=Levantc
-```
+## Security
 
-## Composer and dependencies
+Do not report security vulnerabilities in public issues. See [Security Policy](SECURITY.md).
 
-- **`modules/levantc/composer.json`** declares identity, autoload, and Laravel discovery—not a full duplicate of the framework stack
-- Add new **runtime** dependencies to the **platform** `composer.json` when the host application needs them
-- Keep `levantc/levantc` `require` minimal (`php` only); Laravel packages belong on the host
+## Code of conduct
 
-## Documentation
-
-Update README or INSTALLATION when integration steps, structure, or ecosystem positioning changes.
-
-## Commit conventions
-
-Use clear imperative subjects:
-
-```
-Add responder option for external redirect URLs
-Document platform-root test workflow in INSTALLATION
-```
-
-Reference issues when applicable: `Fixes #42`.
+All participants must follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Questions
 
-Email **[founder.muath@levantc.io](mailto:founder.muath@levantc.io)** or see [CONTACT.md](CONTACT.md).
-
-For security vulnerabilities, follow [SECURITY.md](SECURITY.md) — do not open public issues.
+**[founder.muath@levantc.io](mailto:founder.muath@levantc.io)** — or see [Contact](CONTACT.md).

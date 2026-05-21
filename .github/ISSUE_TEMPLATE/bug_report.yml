@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve **levantc/levantc**. For security issues, email [founder.muath@levantc.io](mailto:founder.muath@levantc.io) — do not file a public issue.
+        Thanks for helping improve **levantc/levantc**. For security issues, see [SECURITY.md](../../SECURITY.md) and email [founder.muath@levantc.io](mailto:founder.muath@levantc.io) — do not file a public issue.
 
   - type: textarea
     id: description
