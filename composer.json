@@ -1,26 +1,59 @@
 {
-    "name": "eta/core",
-    "description": "Core module for Eta project providing essential services, base infrastructure, shared DTOs, Repositories, Providers, and reusable utilities to all other modules.",
-    "minimum-stability": "stable",
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "levantc/levantc",
+    "description": "LevantC Foundation Layer — the central Laravel-native platform core and shared system kernel that all LevantC modules extend.",
+    "type": "library",
+    "keywords": [
+        "levantc",
+        "laravel",
+        "platform-core",
+        "foundation-layer",
+        "modular-architecture",
+        "ddd",
+        "ecosystem"
+    ],
+    "homepage": "https://www.levantc.io",
     "license": "proprietary",
     "authors": [
         {
             "name": "Muath R Abu Ouda",
-            "email": "muathabuouda@hotmail.com"
+            "email": "founder.muath@levantc.io",
+            "role": "Lead Engineer"
         }
     ],
+    "support": {
+        "email": "founder.muath@levantc.io",
+        "issues": "https://github.com/levantc/levantc/issues",
+        "source": "https://github.com/levantc/levantc"
+    },
+    "require": {
+        "php": "^8.5"
+    },
     "autoload": {
         "psr-4": {
-            "Eta\\Core\\": "",
-            "Eta\\Core\\Module\\": "module"
-        },
-        "files": []
+            "Levantc\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Eta\\Core\\Tests\\": "tests/"
+            "Levantc\\Tests\\": "tests/"
         }
     },
-    "require": {},
-    "require-dev": {}
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Levantc\\Providers\\ModuleServiceProvider",
+                "Levantc\\Providers\\BroadcastServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
