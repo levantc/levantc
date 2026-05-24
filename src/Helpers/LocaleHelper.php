@@ -2,9 +2,9 @@
 
 namespace Levantc\Helpers;
 
+use Levantc\model\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use RuntimeException;
 
 class LocaleHelper
@@ -27,7 +27,7 @@ class LocaleHelper
      * Get the locale ID based on the current application locale.
      * Queries the locales table only once and caches the result.
      */
-    public static function getLocaleId(?string $code = null): int
+    public static function getLocaleId(?string $code = null): ?int
     {
         $currentLocale = $code ?? app()->getLocale();
         if (! isset(self::$localeIds[$currentLocale])) {
@@ -48,7 +48,30 @@ class LocaleHelper
             self::$localeIds[$currentLocale] = $query->value('id');
         }
 
-        return (int) self::$localeIds[$currentLocale];
+        $localeId = self::$localeIds[$currentLocale];
+
+        return $localeId !== null ? (int) $localeId : null;
+    }
+
+    /**
+     * Resolve the active locale record for the current application locale.
+     */
+    public static function getCurrentLocale(bool $withRelations = true): ?Model
+    {
+        $locale = self::getLocaleById(self::getLocaleId(), $withRelations);
+
+        if ($locale !== null) {
+            return $locale;
+        }
+
+        $query = self::localeQuery();
+
+        if ($withRelations) {
+            $query->with(['language', 'country']);
+        }
+
+        return (clone $query)->where('default', true)->first()
+            ?? $query->first();
     }
 
     /**
