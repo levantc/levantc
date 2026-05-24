@@ -12,6 +12,6 @@ return [
     | that provides internationalization data (for example, a dedicated i18n module).
     |
     */
-    'locale_model' => env('LEVANTC_LOCALE_MODEL'),
+    'locale_model' => env('LEVANTC_LOCALE_MODEL', 'Levantc\\I18n\\Module\\Models\\Locale\\Locale'),
 
 ];
