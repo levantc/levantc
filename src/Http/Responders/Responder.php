@@ -75,31 +75,44 @@ abstract class Responder
      */
     protected function ensureComponentExists(string $component): void
     {
-        // Possible base paths for Inertia pages
-        $basePaths = [
-            resource_path('js/Pages'), // Main project
-            base_path('modules'),      // Modules root
-        ];
-        // Possible component file extensions
         $extensions = ['vue', 'jsx', 'tsx'];
-        foreach ($basePaths as $basePath) {
-            foreach ($extensions as $ext) {
-                // Case 1: Main Pages
-                $projectFile = "{$basePath}/{$component}.{$ext}";
-                if (is_file($projectFile)) {
-                    return;
-                }
-                // Case 2: Module Pages (ModuleName::path/to/Page)
-                if (str_contains($component, '::')) {
-                    [$module, $path] = explode('::', $component, 2);
 
-                    $moduleFile = "{$basePath}/{$module}/resources/js/pages/{$path}.{$ext}";
-                    if (is_file($moduleFile)) {
+        if (str_contains($component, '::')) {
+            [$module, $path] = explode('::', $component, 2);
+
+            $modulePagePaths = [
+                resource_path("js/apps/panel/modules/{$module}/pages/{$path}"),
+                base_path("modules/{$module}/resources/js/pages/{$path}"),
+            ];
+
+            foreach ($modulePagePaths as $modulePagePath) {
+                foreach ($extensions as $ext) {
+                    if (is_file("{$modulePagePath}.{$ext}")) {
                         return;
                     }
                 }
             }
+
+            throw new InvalidArgumentException(
+                "Inertia component [{$component}] was not found in centralized or module Pages."
+            );
         }
+
+        $projectPagePaths = [
+            resource_path("js/apps/auth/pages/{$component}"),
+            resource_path("js/apps/app/pages/{$component}"),
+            resource_path("js/apps/panel/pages/{$component}"),
+            resource_path("js/Pages/{$component}"),
+        ];
+
+        foreach ($projectPagePaths as $projectPagePath) {
+            foreach ($extensions as $ext) {
+                if (is_file("{$projectPagePath}.{$ext}")) {
+                    return;
+                }
+            }
+        }
+
         throw new InvalidArgumentException(
             "Inertia component [{$component}] was not found in Project or Module Pages."
         );
